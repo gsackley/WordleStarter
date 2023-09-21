@@ -39,11 +39,17 @@ def wordle():
                 else:
                     gw.set_square_color(row,square, "#999999")
                 square = square+1
-            gw.set_current_row(row+1)
+            if row < 5 and word.lower() != random_word:
+                gw.set_current_row(row+1)
+            if row == 5 and word.lower() != random_word:
+                gw.show_message(f'You lose! The word was "{random_word}"')
         elif (word[-1]) == " ":
             gw.show_message("Not enough letters")
         else:
             gw.show_message("Not in word list")    
+        
+        if word.lower() == random_word:
+            gw.show_message("You win!")
    
     gw = WordleGWindow()
     gw.add_enter_listener(enter_action)
